@@ -14,18 +14,18 @@ contract StakersConstants {
 
 
     /**
-     * @dev Minimum amount of stake for a validator, i.e., 1000000 ICICB
+     * @dev Minimum amount of stake for a validator, i.e., 10 BTC
      */
     function minSelfStake() public pure returns (uint256) {
-        return 1e4 * 1e18;
+        return 10 * 1e18;
     }
 
     /**
-     * @dev Maximum ratio of delegations a validator can have, say, 15 times of self-stake
+     * @dev Maximum ratio of delegations a validator can have, say, 160 times of self-stake
      */
     function maxDelegatedRatio() public pure returns (uint256) {
-        // 1600%
-        return 16 * Decimal.unit();
+        // 16000%
+        return 160 * Decimal.unit();
     }
 
     /**

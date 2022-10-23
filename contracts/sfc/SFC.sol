@@ -183,7 +183,7 @@ contract SFC is Initializable, Ownable, StakersConstants, Version {
         currentSealedEpoch = sealedEpoch;
         node = NodeDriverAuth(nodeDriver);
         totalSupply = _totalSupply;
-        baseRewardPerSecond = 0.76053034884189 * 1e18;
+        baseRewardPerSecond = 0.004 * 1e18;
         offlinePenaltyThresholdBlocksNum = 1000;
         offlinePenaltyThresholdTime = 3 days;
         getEpochSnapshot[sealedEpoch].endTime = _now();
@@ -325,7 +325,7 @@ contract SFC is Initializable, Ownable, StakersConstants, Version {
 
         require(amount > 0, "zero amount");
         require(amount <= getUnlockedStake(delegator, toValidatorID), "not enough unlocked stake");
-        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sGLXY balance");
+        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sBTC balance");
 
         require(getWithdrawalRequest[delegator][toValidatorID][wrID].amount == 0, "wrID already exists");
 
@@ -360,7 +360,7 @@ contract SFC is Initializable, Ownable, StakersConstants, Version {
         address payable delegator = msg.sender;
         WithdrawalRequest memory request = getWithdrawalRequest[delegator][toValidatorID][wrID];
         require(request.epoch != 0, "request doesn't exist");
-        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sGLXY balance");
+        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sBTC balance");
 
         uint256 requestTime = request.time;
         uint256 requestEpoch = request.epoch;
@@ -817,7 +817,7 @@ contract SFC is Initializable, Ownable, StakersConstants, Version {
         require(amount > 0, "zero amount");
         require(isLockedUp(delegator, toValidatorID), "not locked up");
         require(amount <= ld.lockedStake, "not enough locked stake");
-        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sGLXY balance");
+        require(_checkAllowedToWithdraw(delegator, toValidatorID), "outstanding sBTC balance");
 
         _stashRewards(delegator, toValidatorID);
 

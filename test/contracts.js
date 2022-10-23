@@ -19,24 +19,24 @@ describe("Create UserWallet", function () {
 		});
 		await tx.wait();	
 
-		var sGLXY;
+		var sBTC;
 		var stakeTokenizer;
-		/* ----------- sGLXY -------------- */
-		//deploy SGLXY contract for test
-		const SGLXY = await ethers.getContractFactory("SGLXY");
-		sGLXY = await SGLXY.deploy();
-		await sGLXY.deployed();
+		/* ----------- sBTC -------------- */
+		//deploy SBTC contract for test
+		const SBTC = await ethers.getContractFactory("SBTC");
+		sBTC = await SBTC.deploy();
+		await sBTC.deployed();
 
 		const StakeTokenizer = await ethers.getContractFactory("StakeTokenizer");
-		stakeTokenizer = await StakeTokenizer.deploy(sGLXY.address);
+		stakeTokenizer = await StakeTokenizer.deploy(sBTC.address);
 		await stakeTokenizer.deployed();
 
-		var tx = await sGLXY.addMinter(stakeTokenizer.address);
+		var tx = await sBTC.addMinter(stakeTokenizer.address);
 		await tx.wait();
 
-		// stakerInfo
+		// // // stakerInfo
 		const StakerInfo = await ethers.getContractFactory("StakerInfo");
-		stakerInfo = await StakerInfo.deploy();
+		stakerInfo = await StakerInfo.deploy(false);
 		await stakerInfo.deployed();
 	});
 });

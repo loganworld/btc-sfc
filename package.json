@@ -27,7 +27,7 @@
   },
   "scripts": {
     "deploy_test": "npx hardhat test",
-    "galaxy": "npx hardhat run --network galaxy scripts/deploy.js"
+    "deploy": "npx hardhat run --network btc scripts/deploy.js"
   },
   "eslintConfig": {
     "extends": [

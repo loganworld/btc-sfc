@@ -17,21 +17,21 @@ async function main() {
 
 	console.log("deployer", deployer.address);
 
-	let sGLXY;
+	let sBTC;
 	let stakeTokenizer;
 	let stakerInfo;
 
-	/* ----------- sGLXY -------------- */
-	//deploy SGLXY contract for test
-	const SGLXY = await ethers.getContractFactory("SGLXY");
-	sGLXY = await SGLXY.deploy();
-	await sGLXY.deployed();
+	/* ----------- sBTC -------------- */
+	//deploy SBTC contract for test
+	const SBTC = await ethers.getContractFactory("SBTC");
+	sBTC = await SBTC.deploy();
+	await sBTC.deployed();
 
 	const StakeTokenizer = await ethers.getContractFactory("StakeTokenizer");
-	stakeTokenizer = await StakeTokenizer.deploy(sGLXY.address);
+	stakeTokenizer = await StakeTokenizer.deploy(sBTC.address);
 	await stakeTokenizer.deployed();
 
-	let tx = await sGLXY.addMinter(stakeTokenizer.address);
+	let tx = await sBTC.addMinter(stakeTokenizer.address);
 	await tx.wait();
 
 	// stakerInfo
@@ -40,16 +40,16 @@ async function main() {
 	await stakerInfo.deployed();
 
 	//sfc
-	// const sFC = new ethers.Contract("0x1c1cB00000000000000000000000000000000000",SFCAbi,sfcOwner);
+	// const sFC = new ethers.Contract("0xeAb1000000000000000000000000000000000000",SFCAbi,sfcOwner);
 	// tx = await sFC.updateStakeTokenizerAddress(stakeTokenizer.address);
 	// await tx.wait();
 
-	console.log("SGLXY : ", sGLXY.address);
+	console.log("SBTC : ", sBTC.address);
 	console.log("StakeTokenizer : ", stakeTokenizer.address);
 	console.log("StakerInfo : ", stakerInfo.address);
 
 	fs.writeFileSync(__dirname + '/contracts.json', JSON.stringify({
-		SGLXY: sGLXY.address,
+		SBTC: sBTC.address,
 		StakeTokenizer: stakeTokenizer.address,
 		StakerInfo: stakerInfo.address
 	}))

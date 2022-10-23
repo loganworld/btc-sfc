@@ -879,7 +879,7 @@ contract WhitelistedSenderRole {
  * tokens and those that they have an allowance for, in a way that can be
  * recognized off-chain (via event analysis).
  */
-contract SGLXY is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, Ownable, WhitelistedRecipientRole, WhitelistedSenderRole {
+contract SBTC is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, Ownable, WhitelistedRecipientRole, WhitelistedSenderRole {
 
     /**
      * @dev Sets the values for `name`, `symbol`, and `decimals`. All three of
@@ -888,7 +888,7 @@ contract SGLXY is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, Ownable, W
      */
     constructor() public {
         // initialize the token
-        ERC20Detailed.initialize("Staked GLXY", "GLXY", 18);
+        ERC20Detailed.initialize("Staked BTC", "BTC", 18);
 
         // initialize the Ownable
         // _transferOwnership(owner);
@@ -923,22 +923,22 @@ contract SGLXY is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, Ownable, W
     }
 
     function transfer(address to, uint256 value) public returns (bool) {
-        require(isWhitelisted(msg.sender, to), "SGLXY: not whitelisted");
+        require(isWhitelisted(msg.sender, to), "SBTC: not whitelisted");
         return ERC20.transfer(to, value);
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) public returns (bool) {
-        require(isWhitelisted(msg.sender, recipient), "SGLXY: not whitelisted");
+        require(isWhitelisted(msg.sender, recipient), "SBTC: not whitelisted");
         return ERC20.transferFrom(sender, recipient, amount);
     }
 
     function approve(address spender, uint256 value) public returns (bool) {
-        require(isWhitelisted(msg.sender, spender), "SGLXY: not whitelisted");
+        require(isWhitelisted(msg.sender, spender), "SBTC: not whitelisted");
         return ERC20.approve(spender, value);
     }
 
     function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
-        require(isWhitelisted(msg.sender, spender), "SGLXY: not whitelisted");
+        require(isWhitelisted(msg.sender, spender), "SBTC: not whitelisted");
         return ERC20.increaseAllowance(spender, addedValue);
     }
 }

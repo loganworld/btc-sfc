@@ -15,9 +15,9 @@ compile contract files
 
 contract uint test
 
-### `npm run deploy_glxy`
+### `npm run deploy_btc`
 
-contract deploy to glxytestnet
-### `npm run deploy_glxy_test`
+contract deploy to btctestnet
+### `npm run deploy_btc_test`
 
-contract deploy to glxy chain
+contract deploy to btc chain
